@@ -1,0 +1,9 @@
+networks:
+  default:
+  driver: bridge
+  name: roboshop
+  external: true #i created already in manual using docker network is roboshop
+services:
+  mongodb:
+    image: sangala2025/mongodb:v1
+    container_name: mongodb
