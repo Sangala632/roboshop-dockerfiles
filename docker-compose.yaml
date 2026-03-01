@@ -7,3 +7,43 @@ services:
   mongodb:
     image: sangala2025/mongodb:v1
     container_name: mongodb
+  
+  catalogue:
+    image: sangala2025/catalogue:v1
+    container_name: catalogue
+    depends_on:
+      - mongodb
+  
+  redis:
+    image: sangala2025/redis:v1
+    container_name: redis
+
+  user:
+    image: sangala2025/user:v1
+    container_name: user
+    depends_on:
+      - mongodb
+      - redis
+  
+  cart:
+    image: sangala2025/cart:v1
+    container_name: cart
+    depends_on:
+      - redis
+      - catalogue
+  
+  mysql:
+    image: sangala2025/mysql:v1
+    container_name: mysql
+  
+  shipping:
+    image: sangala2025/shipping:v1
+    container_name: shipping
+    depends_on:
+      - mysql
+      - cart
+  
+  rabbitmq:
+    image: sangala2025/rabbitmq:v1
+    container_name: rabbitmq
+    
