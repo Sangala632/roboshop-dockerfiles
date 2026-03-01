@@ -1,2 +1,2 @@
-FROM rabbitmq:3.0
+FROM rabbitmq:3
 
