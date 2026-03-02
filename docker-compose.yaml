@@ -63,3 +63,16 @@ services:
       - cart
       - user
       - rabbitmq
+  
+  frontend:
+    image: sangala2025/frontend:v1
+    container_name: frontend 
+    ports:
+      - "80:80"
+    depends_on:
+      - catalogue
+      - cart
+      - user
+      - shipping
+      - payment
+      
