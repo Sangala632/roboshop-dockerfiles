@@ -42,7 +42,9 @@ services:
     depends_on:
       - mysql
       - cart
-  
   rabbitmq:
     image: sangala2025/rabbitmq:v1
     container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: roboshop 
+      RABBITMQ_DEFAULT_PASS: roboshop123
