@@ -10,9 +10,9 @@ COPY payment.ini .
 
 RUN pip install -r requirements.txt
 
-ENV CART_HOST=cart \
-    USER_HOST=user \
-    AMQP_HOST=rabbitmq
+# ENV CART_HOST=cart \
+#     USER_HOST=user \
+#     AMQP_HOST=rabbitmq
 
 EXPOSE 8080
 
