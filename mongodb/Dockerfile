@@ -2,4 +2,4 @@
 FROM mongo:7.0
 
 # copy the db file
-COPY .js* /docker-entrypoint-initdb.d
+COPY master-data.js /docker-entrypoint-initdb.d
