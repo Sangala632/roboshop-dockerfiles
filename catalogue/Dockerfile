@@ -1,5 +1,5 @@
 #multi stage builds
-FROM node:20-alpine.23 AS builder 
+FROM node:20-alpine3.23 AS builder 
 WORKDIR /opt/server
 COPY package.json .
 COPY *.js .
