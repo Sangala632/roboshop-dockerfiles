@@ -1,17 +1,32 @@
-
-#optimizing the image takes memory only 300mb 
-FROM node:20-alpine3.23
-# Create a group and user
-RUN addgroup -S roboshop-project && adduser -S roboshop -G roboshop-project
+#multi stage builds
+FROM node:20-alpine.23 AS builder 
 WORKDIR /opt/server
 COPY package.json .
 COPY *.js .
 RUN npm install
-RUN chown -R roboshop:roboshop-project /opt/server
+
+FROM node:20-alpine3.23
+RUN addgroup -S roboshop-project && adduser -S roboshop -G roboshop-project
 ENV MONGO="true" \
     MONGO_URL="mongodb://mongodb:27017/catalogue"
 USER roboshop
+COPY --from=builder /opt/server /opt/server
 CMD ["node", "server.js"]
+
+
+# #optimizing the image takes memory only 300mb 
+# FROM node:20-alpine3.23
+# # Create a group and user
+# RUN addgroup -S roboshop-project && adduser -S roboshop -G roboshop-project
+# WORKDIR /opt/server
+# COPY package.json .
+# COPY *.js .
+# RUN npm install
+# RUN chown -R roboshop:roboshop-project /opt/server
+# ENV MONGO="true" \
+#     MONGO_URL="mongodb://mongodb:27017/catalogue"
+# USER roboshop
+# CMD ["node", "server.js"]
 
 #normal docker image takes memory is high like 1.25gb 
 # #nodejs installing from the dockerhub
