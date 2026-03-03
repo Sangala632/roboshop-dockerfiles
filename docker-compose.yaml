@@ -6,15 +6,15 @@ networks:
 
 volumes:
   mongodb:
-  resis:
+  redis:
   mysql:
   rabbitmq:
 services:
   mongodb:
     image: sangala2025/mongodb:v1
     container_name: mongodb
-  volumes:
-  - mongodb: /data/db
+    volumes:
+      - mongodb:/data/db
   
   catalogue:
     image: sangala2025/catalogue:v1
@@ -26,7 +26,7 @@ services:
     image: sangala2025/redis:v1
     container_name: redis
     volumes:
-      - redis: /data
+      - redis:/data
 
   user:
     image: sangala2025/user:v1
@@ -45,8 +45,8 @@ services:
   mysql:
     image: sangala2025/mysql:v1
     container_name: mysql
-  volumes:
-    - mysql: /var/lib/mysql
+    volumes:
+      - mysql:/var/lib/mysql
   
   shipping:
     image: sangala2025/shipping:v1
@@ -61,7 +61,7 @@ services:
       RABBITMQ_DEFAULT_USER: roboshop 
       RABBITMQ_DEFAULT_PASS: roboshop123
     volumes:
-      - /var/lib/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
   payment:
     image: sangala2025/payment:v1
     container_name: payment
