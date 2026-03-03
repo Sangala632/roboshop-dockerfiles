@@ -1,6 +1,6 @@
 
 #optimizing the image takes memory only 300mb 
-FROM node:20-alpine
+FROM node:20-alpine3.23
 # Create a group and user
 RUN addgroup -S roboshop-project && adduser -S roboshop -G roboshop-project
 WORKDIR /opt/server
