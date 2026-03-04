@@ -1,4 +1,4 @@
-#multi stage builds
+#multi stage builds 243mb
 FROM node:20-alpine3.23 AS builder 
 WORKDIR /opt/server
 COPY package.json .
@@ -7,6 +7,7 @@ RUN npm install
 
 FROM node:20-alpine3.23
 RUN addgroup -S roboshop-project && adduser -S roboshop -G roboshop-project
+WORKDIR /opt/server
 ENV MONGO="true" \
     MONGO_URL="mongodb://mongodb:27017/catalogue"
 USER roboshop
@@ -14,7 +15,7 @@ COPY --from=builder /opt/server /opt/server
 CMD ["node", "server.js"]
 
 
-# #optimizing the image takes memory only 300mb 
+# #optimizing the image takes memory only 600mb 
 # FROM node:20-alpine3.23
 # # Create a group and user
 # RUN addgroup -S roboshop-project && adduser -S roboshop -G roboshop-project

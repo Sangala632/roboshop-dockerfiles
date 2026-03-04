@@ -1,19 +1,42 @@
-FROM python:3.9
-
-WORKDIR /opt/server
-
-COPY *.py .
-
+# Stage 1: Build
+FROM 3.9.23-alpine3.22 AS builder
+WORKDIR /build
+# Install build dependencies
+RUN apk add --no-cache python3-dev build-base linux-headers pcre-dev
 COPY requirements.txt .
+RUN pip3 install --no-cache-dir --prefix=/install -r requirements.txt
 
-COPY payment.ini .
 
-RUN pip install -r requirements.txt
-
-# ENV CART_HOST=cart \
-#     USER_HOST=user \
-#     AMQP_HOST=rabbitmq
-
+FROM 3.9.23-alpine3.22
 EXPOSE 8080
+WORKDIR /opt/server
+# Runtime dependencies only
+RUN apk add --no-cache pcre
+RUN addgroup -S roboshop-project && adduser -S roboshop -G roboshop-project
+USER roboshop
+# Copy installed Python packages from builder
+COPY --from=builder /install /usr/local
+# Copy application code
+COPY --chown=roboshop:roboshop payment.ini .
+COPY --chown=roboshop:roboshop *.py .
+CMD ["uwsgi", "--ini", "payment.ini"]
 
-CMD ["uwsgi","--ini","payment.ini"]
+# FROM python:3.9
+
+# WORKDIR /opt/server
+
+# COPY *.py .
+
+# COPY requirements.txt .
+
+# COPY payment.ini .
+
+# RUN pip install -r requirements.txt
+
+# # ENV CART_HOST=cart \
+# #     USER_HOST=user \
+# #     AMQP_HOST=rabbitmq
+
+# EXPOSE 8080
+
+# CMD ["uwsgi","--ini","payment.ini"]
