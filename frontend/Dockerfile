@@ -3,11 +3,6 @@ FROM nginx:1.29.0-alpine
 RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 #install nginx
-
-RUN apt-get update && apt-get upgrade -y \
-    && apt install nano curl -y \ 
-    && rm -rf /var/lib/apt/lists/*
-
 RUN mkdir -p /var/cache/nginx/client_temp && \
         mkdir -p /var/cache/nginx/proxy_temp && \
         mkdir -p /var/cache/nginx/fastcgi_temp && \

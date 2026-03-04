@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM 3.9.23-alpine3.22 AS builder
+FROM python:3.9.23-alpine3.22 AS builder
 WORKDIR /build
 # Install build dependencies
 RUN apk add --no-cache python3-dev build-base linux-headers pcre-dev
@@ -7,7 +7,7 @@ COPY requirements.txt .
 RUN pip3 install --no-cache-dir --prefix=/install -r requirements.txt
 
 
-FROM 3.9.23-alpine3.22
+FROM python:3.9.23-alpine3.22
 EXPOSE 8080
 WORKDIR /opt/server
 # Runtime dependencies only
