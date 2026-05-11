@@ -28,10 +28,10 @@ RoboShop is a microservices-based e-commerce demo application. This repo contain
               │   Node.js 20      │ │Node│ │Node│ │  Java 21   │ │  Python 3.11   │
               │   :8080           │ │:20 │ │:20 │ │  Maven     │ │  uWSGI         │
               └──────┬────────────┘ └─┬──┘ └┬─┬─┘ └──────┬────┘ └──┬──┬─────────┘
-                     │                │     │ │           │          │  │
-                     │     ┌──────────┘     │ └─────►     │          │  │
-                     │     │    ┌───────────┘    cart      │          │  │
-                     │     │    │                           │          │  │
+                     │                │     │ │          │        │   │
+                     │     ┌──────────┘     │ └─────►    │        │   │
+                     │     │    ┌───────────┘    cart      │       │   │
+                     │     │    │                           │      │   │
               ┌──────▼─────▼──┐ ┌────────────┐     ┌──────▼──┐  ┌───▼──▼─────────┐
               │    MongoDB 7  │ │  Redis 7   │     │ MySQL 8 │  │ RabbitMQ 3.13  │
               │    :27017     │ │   :6379    │     │  :3306  │  │    :5672       │
@@ -101,7 +101,7 @@ roboshop-docker/
 
 ```bash
 git clone <your-repo-url>
-cd roboshop-docker
+cd roboshop-dockerfiles
 
 cp .env.example .env
 ```
